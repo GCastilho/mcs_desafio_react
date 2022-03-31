@@ -57,23 +57,35 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        {error && <p>Error: {error}</p>}
+        {error && <p className={styles.error}>Error: {error}</p>}
+        <h1>Inflação Acumulada</h1>
 
-        <p>IPCA Acumulado de {formatDateBr(start)} até {formatDateBr(end)}: {ipca.toFixed(2)}%</p>
+        <p>IPCA Acumulado de <b>{formatDateBr(start)}</b> até <b>{formatDateBr(end)}</b>:</p>
 
-        <form action="">
-          <input
-            type='month'
-            name='start'
-            value={formatDateForInput(start)}
-            onChange={e => setStart(new Date(e.target.value))}
-          />
-          <input
-            type='month'
-            name='end'
-            value={formatDateForInput(end)}
-            onChange={e => setEnd(new Date(e.target.value))}
-          />
+        <h2>{ipca.toFixed(2)}%</h2>
+
+        <form className={styles.form}>
+          <h3>Selecione o range para cálculo:</h3>
+          <div>
+            <section>
+              <p>Inicio</p>
+              <input
+                type='month'
+                name='start'
+                value={formatDateForInput(start)}
+                onChange={e => setStart(new Date(e.target.value))}
+              />
+            </section>
+            <section>
+              <p>Fim</p>
+              <input
+                type='month'
+                name='end'
+                value={formatDateForInput(end)}
+                onChange={e => setEnd(new Date(e.target.value))}
+              />
+            </section>
+          </div>
         </form>
       </main>
 

@@ -4,10 +4,45 @@
 
 .main {
   min-height: 100vh;
-  padding: 4rem 0;
+  padding: 1rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+}
+
+.error {
+  padding: 5px ;
+  text-align: center;
+  border: 1px solid var(--form-error-color-text, #ff0000);
+  border-radius: 5px;
+  background-color: var(--form-error-color-background, #fff0f0);
+  color: var(--form-error-color-text, #ff0000);
+}
+
+.form {
+  margin-top: 1.5em;
+  border: 1px solid lightgray;
+  border-radius: 0.5em;
+  padding: 1em;
+}
+
+.form h3 {
+  margin-top: 0;
+}
+
+.form > h3, .form p {
+  text-align: center;
+}
+
+.form > div {
+  flex: 1;
+  gap: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.form p {
+  margin: 0.3em
 }
