@@ -26,6 +26,7 @@ function formatDateForInput(date: Date) {
 const { format: formatDateBr } = new Intl.DateTimeFormat('pt-BR', { timeZone: 'UTC' })
 
 const Home: NextPage = () => {
+  const [error, setError] = useState('')
   const [ipca, setIpca] = useState<number>(0)
   const [start, setStart] = useState(get12MonthsAgo())
   const [end, setEnd] = useState(new Date())
@@ -42,7 +43,10 @@ const Home: NextPage = () => {
       .then(res => res.json() as Promise<RawIpca[]>)
       .then(data => data.map(v => +v.valor).reduce((acc, cur) => acc + cur))
       .then(ipca => setIpca(ipca))
-      .catch(err => console.error('err', err))
+      .catch(err => {
+        console.error('Error:', err)
+        setError(err.statusText)
+      })
   }, [start, end])
 
   return (
@@ -53,6 +57,8 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
+        {error && <p>Error: {error}</p>}
+
         <p>IPCA Acumulado de {formatDateBr(start)} até {formatDateBr(end)}: {ipca.toFixed(2)}%</p>
 
         <form action="">
